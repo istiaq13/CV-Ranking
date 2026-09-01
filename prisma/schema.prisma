@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Analysis {
+  id                 String   @id @default(cuid())
+  candidateName      String   @default("Candidate")
+  targetRole         String   @default("Target Position")
+  companyName        String?
+  matchScore         Int
+  hardSkillsScore    Int      @default(0)
+  experienceScore    Int      @default(0)
+  softSkillsScore    Int      @default(0)
+  atsScore           Int      @default(0)
+  summary            String
+  matchedSkills      String   // JSON string of string[] or object[]
+  missingSkills      String   // JSON string of string[] or object[]
+  suggestions        String   // JSON string of string[]
+  tailoredBullets    String?  // JSON string of generated bullets
+  interviewQuestions String?  // JSON string of generated interview questions
+  resumeText         String
+  jdText             String
+  createdAt          DateTime @default(now())
+}
